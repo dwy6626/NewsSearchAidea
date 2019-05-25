@@ -11,13 +11,10 @@ class TrainingQuery(Dataset):
         
         # proccess data
         merged_training = pd.merge(TD, NC1, on=['News_Index'])
-        contents_splitted = merged_training['Query'].apply(
-            lambda x: x.split('\n')
-        )
         
         # construct dataset
+        self.queries = merged_training['Query']
         self.contents = contents[merged_training['News_URL']]
-        self.queries = contents_splitted
         self.targets = merged_training['Relevance']
         
         self.size = len(merged_training)
