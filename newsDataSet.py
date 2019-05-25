@@ -10,7 +10,7 @@ class TrainingQuery(Dataset):
         contents = pd.read_json('url2content.json', typ=pd.Series)
         
         # proccess data
-        merged_training = pd.merge(TD, NC1, on=['News_Index'])
+        merged_training = pd.merge(raw_training_data, news_urls, on=['News_Index'])
         
         # construct dataset
         self.queries = merged_training['Query']
