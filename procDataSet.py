@@ -1,4 +1,5 @@
 import os
+from itertools import product
 
 
 import torch
@@ -22,6 +23,24 @@ class TrainingQuery(Dataset):
         
     def __getitem__(self, i):        
         return self.queries[i], self.contents[i], self.targets[i]
+    
+    def __len__(self):
+        return self.size
+
+    
+
+class TestQuery(Dataset):
+    def __init__(self, embedded_path='data/embedded'):      
+        # read data
+        self.contents = torch.from_numpy(np.load(os.path.join(embedded_path, 'encoded_all_content.npy')))
+        self.queries = torch.from_numpy(np.load(os.path.join(embedded_path, 'encoded_test_query.npy')))
+
+        self.indices = list(product(range(self.queries.shape[0]), range(self.contents.shape[0])))
+        self.size = len(self.indices)
+        
+    def __getitem__(self, i):    
+        j, k = self.indices[i]
+        return self.queries[j], self.contents[k]
     
     def __len__(self):
         return self.size
