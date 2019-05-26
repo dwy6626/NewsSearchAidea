@@ -1,16 +1,16 @@
 from torch.utils.data import Dataset
 import pandas as pd
-
+import os 
 
 class TrainingQuery(Dataset):
-    def __init__(self):      
+    def __init__(self, folder='.'):      
         # read provided data
-        raw_training_data = pd.read_csv('TD.csv')
-        news_urls = pd.read_csv('NC_1.csv')
-        contents = pd.read_json('url2content.json', typ=pd.Series)
-        
+        raw_training_data = pd.read_csv(os.path.join(folder,'TD.csv'))
+        news_urls = pd.read_csv(os.path.join(folder,'NC_1.csv'))
+        contents = pd.read_json(os.path.join(folder,'url2content.json'), typ=pd.Series)
         # proccess data
         merged_training = pd.merge(raw_training_data, news_urls, on=['News_Index'])
+
         
         # construct dataset
         self.queries = merged_training['Query']
