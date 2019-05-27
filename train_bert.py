@@ -1,4 +1,3 @@
-from procDataSet import TrainingQuery
 from bert_serving.client import BertClient
 from multiprocessing import Pool
 from torch.utils.data import TensorDataset, DataLoader, Dataset
