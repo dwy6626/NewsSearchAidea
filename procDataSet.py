@@ -32,7 +32,7 @@ class TrainingQuery(Dataset):
 class TrainingQueryAll(Dataset):
     def __init__(
         self, raw_path='data', embedded_path='data/embedded', 
-        is_valid=False, validation_queries=None, normalize01=False
+        is_valid=False, validation_queries=None, normalize01=False, weight=False
     ):      
         # read relevance
         raw_training_data = pd.read_csv(os.path.join(raw_path, 'TD.csv'))
@@ -43,6 +43,8 @@ class TrainingQueryAll(Dataset):
         query_embedded = np.load(os.path.join(embedded_path, 'encoded_training_uniq_query.npy'))
 
         # validation split
+        if validation_queries is None:
+            validation_queries = []
         if is_valid:
             used_queries = validation_queries
         else:
@@ -67,13 +69,29 @@ class TrainingQueryAll(Dataset):
             ), 
             (len(query_list), self.contents.shape[0])
         ).toarray()            
+
+        self.weight_flag = bool(weight)
+#         self.weights = sparse.coo_matrix(
+#             (
+#                 np.ones(len(used_data)) * (weight-1),(
+#                     used_data['Query'].apply(query_list.index), 
+#                     used_data['News_Index'].apply(lambda x: int(x[5:]))
+#                 )
+#             ), 
+#             (len(query_list), self.contents.shape[0])
+#         ).toarray() + 1
+#         self.weights = self.weights / weight
+        self.weights = (self.targets * (weight - 1) + 1) / weight
         
         if normalize01:
             self.targets = self.targets / 3
-        
+            
     def __getitem__(self, i):     
         j, k = self.indices[i]
-        return self.queries[j], self.contents[k], torch.tensor(self.targets[j, k])
+        rt = (self.queries[j], self.contents[k], torch.tensor([self.targets[j, k]]))
+        if self.weight_flag:
+            rt = *rt, torch.tensor([self.weights[j, k]])   
+        return rt
     
     def __len__(self):
         return self.size
@@ -127,7 +145,7 @@ class TrainingQueryAllTwoOut(Dataset):
         
     def __getitem__(self, i):     
         j, k = self.indices[i]
-        return self.queries[j], self.contents[k], torch.tensor(self.classes[j, k]), torch.tensor(self.revelances[j, k])
+        return self.queries[j], self.contents[k], torch.tensor([self.classes[j, k]]), torch.tensor([self.revelances[j, k]])
     
     def __len__(self):
         return self.size
