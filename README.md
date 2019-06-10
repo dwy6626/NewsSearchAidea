@@ -21,6 +21,8 @@ pytorch-pretrained-BERT/run_classifier.py
 
 pytorch-pretrained-BERT/tiidf2bert.py
 
+pytorch-pretrained-BERT/postprocess.py
+
 pytorch-pretrained-BERT/data/NC_1.csv
 
 pytorch-pretrained-BERT/data/QS_1.csv
@@ -36,7 +38,7 @@ pytorch-pretrained-BERT/data/url2content.json
 python3 tfidf2bert.py --data_path data --ans_path ans.csv
 ```
 
-## Step 5: Finetune and Testing (output_dir need to be empty before Finetune) 
+## Step 5: Finetune and Test (output_dir needs to be empty before Finetuning) 
 
 ```bash
 python3 run_classifier.py \
