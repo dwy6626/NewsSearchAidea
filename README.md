@@ -1,3 +1,9 @@
+## 資源整理：
+
+https://hackmd.io/@dwy6626/ml2019spring-final
+
+# Model usage
+
 ## Step 1: Install pytorch pretrained BERT from source
 
 
