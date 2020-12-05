@@ -70,6 +70,3 @@ python3 run_classifier.py \
 ```bash
 python3 postprocess.py --ans_path ans.csv --sorted_ans_path sorted_ans.csv
 ```
-
-
-# Finish!
