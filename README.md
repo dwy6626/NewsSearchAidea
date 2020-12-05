@@ -1,11 +1,14 @@
-## 資源整理：
+## 
+We experiment both traditional information retrieval techniques (such as. TF-IDF, OKapi)
+and deep-learning based model (like Berts). 
+Because of little labeled dataset, deep-learning based model 
+perform worse than traditional one. 
 
+## Our survey document
 https://hackmd.io/@dwy6626/ml2019spring-final
 
-# Model usage
 
 ## Step 1: Install pytorch pretrained BERT from source
-
 
 ```bash
 git clone https://github.com/huggingface/pytorch-pretrained-BERT.git
