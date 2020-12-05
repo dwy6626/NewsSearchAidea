@@ -1,8 +1,8 @@
-## 
+## Project overview.
 We experiment both traditional information retrieval techniques (such as. TF-IDF, OKapi)
 and deep-learning based model (like Berts). 
-Because of little labeled dataset, deep-learning based model 
-perform worse than traditional one. 
+Because of the little labeled dataset, deep-learning based model perform worse than traditional one. 
+Overall, our best model was ranked as top 5% in the first stage AIdea AICup 2019.
 
 ## Our survey document
 https://hackmd.io/@dwy6626/ml2019spring-final
