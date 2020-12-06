@@ -1,14 +1,14 @@
 ## Project overview.
-We experiment both traditional information retrieval techniques (such as. TF-IDF, OKapi)
-and deep-learning based model (like Berts). 
-Because of the little labeled dataset, deep-learning based model perform worse than traditional one. 
-Overall, our best model was ranked as top 5% in the first stage AIdea AICup 2019.
+We experiment with both traditional information retrieval techniques (such as. TF-IDF, OKapi)
+and deep-learning-based model (like Berts). 
+Because of the little labeled dataset, the deep-learning based model performs worse than the traditional one. 
+Overall, our best model was ranked as the top 5% in the first stage AIdea AICup 2019.
 
 ## Our survey document
 https://hackmd.io/@dwy6626/ml2019spring-final
 
 
-## Step 1: Install pytorch pretrained BERT from source
+## Step 1: Install PyTorch pre-trained BERT from source
 
 ```bash
 git clone https://github.com/huggingface/pytorch-pretrained-BERT.git
